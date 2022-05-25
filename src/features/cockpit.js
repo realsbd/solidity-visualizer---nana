@@ -62,7 +62,7 @@ class BaseDataProvider {
             collapsibleState: element.collapsibleState,
             children: element.children,
             command: element.command || {
-                command: 'solidity-va.cockpit.jumpToRange',
+                command: 'solidity-nana.cockpit.jumpToRange',
                 arguments: [element.resource],
                 title: 'JumpTo'
             }
@@ -290,7 +290,7 @@ class TopLevelContractsViewDataProvider extends FilePathTreeDataProvider {
             iconPath: element.iconPath,
             collapsibleState: element.collapsibleState,
             command: element.type === FilePathTreeDataProvider.TYPE_FILE ? {
-                command: 'solidity-va.cockpit.jumpToRange',
+                command: 'solidity-nana.cockpit.jumpToRange',
                 arguments: [element.resource],
                 title: 'JumpTo'
             } : 0,
@@ -322,7 +322,7 @@ class TopLevelContractsView extends BaseView {
         this.cockpit = cockpit;
         this.id = "topLevelContracts";
         this.dataProvider = new TopLevelContractsViewDataProvider(this);
-        this.treeView = vscode.window.createTreeView(`solidity-va-cockpit-${this.id}`, { treeDataProvider: this.dataProvider });
+        this.treeView = vscode.window.createTreeView(`solidity-nana-cockpit-${this.id}`, { treeDataProvider: this.dataProvider });
         this.treeView.message = "click ↻ to scan for contracts...";
     }
 }
@@ -402,7 +402,7 @@ class FTraceView extends BaseView {
         this.cockpit = cockpit;
         this.id = "ftrace";
         this.dataProvider = new FTraceViewDataProvider(this);
-        this.treeView = vscode.window.createTreeView(`solidity-va-cockpit-${this.id}`, { treeDataProvider: this.dataProvider, showCollapseAll: true });
+        this.treeView = vscode.window.createTreeView(`solidity-nana-cockpit-${this.id}`, { treeDataProvider: this.dataProvider, showCollapseAll: true });
         this.treeView.message = "click into the editor to update view...";
     }
 
@@ -508,14 +508,14 @@ class PublicMethodsViewDataProvider extends BaseDataProvider {
                             label: "Ⓜ  " + name,
                             //iconPath: 0,
                             command: {
-                                command: 'solidity-va.cockpit.jumpToRange',
+                                command: 'solidity-nana.cockpit.jumpToRange',
                                 arguments: [element.resource, range],
                                 title: 'JumpTo'
                             }
                         };
                     }),
                     command: {
-                        command: 'solidity-va.cockpit.jumpToRange',
+                        command: 'solidity-nana.cockpit.jumpToRange',
                         arguments: [element.resource, range],
                         title: 'JumpTo'
                     },
@@ -542,7 +542,7 @@ class PublicMethodsView extends BaseView {
         this.cockpit = cockpit;
         this.id = "publicMethods";
         this.dataProvider = new PublicMethodsViewDataProvider(this);
-        this.treeView = vscode.window.createTreeView(`solidity-va-cockpit-${this.id}`, { treeDataProvider: this.dataProvider });
+        this.treeView = vscode.window.createTreeView(`solidity-nana-cockpit-${this.id}`, { treeDataProvider: this.dataProvider });
         this.treeView.message = "click into the editor to update view...";
     }
 
@@ -627,7 +627,7 @@ class ExplorerViewDataProvider extends FilePathTreeDataProvider {
             iconPath: element.iconPath,
             collapsibleState: element.collapsibleState,
             command: element.type === FilePathTreeDataProvider.TYPE_FILE ? {
-                command: 'solidity-va.cockpit.jumpToRange',
+                command: 'solidity-nana.cockpit.jumpToRange',
                 arguments: [element.resource],
                 title: 'JumpTo'
             } : 0,
@@ -654,7 +654,7 @@ class ExplorerView extends BaseView {
         this.cockpit = cockpit;
         this.id = "explorer";
         this.dataProvider = new ExplorerViewDataProvider(this);
-        this.treeView = vscode.window.createTreeView(`solidity-va-cockpit-${this.id}`, { treeDataProvider: this.dataProvider, showCollapseAll: true, canSelectMany: true });
+        this.treeView = vscode.window.createTreeView(`solidity-nana-cockpit-${this.id}`, { treeDataProvider: this.dataProvider, showCollapseAll: true, canSelectMany: true });
     }
 }
 
@@ -688,7 +688,7 @@ class FlatFilesDataProvider extends FilePathTreeDataProvider {
             iconPath: element.iconPath,
             collapsibleState: element.collapsibleState,
             command: element.type === FilePathTreeDataProvider.TYPE_FILE ? {
-                command: 'solidity-va.cockpit.jumpToRange',
+                command: 'solidity-nana.cockpit.jumpToRange',
                 arguments: [element.resource],
                 title: 'JumpTo'
             } : 0,
@@ -715,7 +715,7 @@ class FlatFilesView extends BaseView {
         this.cockpit = cockpit;
         this.id = "flatFiles";
         this.dataProvider = new FlatFilesDataProvider(this);
-        this.treeView = vscode.window.createTreeView(`solidity-va-cockpit-${this.id}`, { treeDataProvider: this.dataProvider, showCollapseAll: true, canSelectMany: true });
+        this.treeView = vscode.window.createTreeView(`solidity-nana-cockpit-${this.id}`, { treeDataProvider: this.dataProvider, showCollapseAll: true, canSelectMany: true });
     }
 }
 
@@ -761,7 +761,7 @@ class SettingsViewDataProvider extends VirtualPathTreeDataProvider {
             iconPath: element.iconPath,
             collapsibleState: element.collapsibleState,
             command: element.type === VirtualPathTreeDataProvider.TYPE_LEAF ? {
-                command: 'solidity-va.cockpit.settings.toggle',
+                command: 'solidity-nana.cockpit.settings.toggle',
                 arguments: [element],
                 title: 'Toggle'
             } : 0,
@@ -794,7 +794,7 @@ class SettingsView extends BaseView {
         this.cockpit = cockpit;
         this.id = "settings";
         this.dataProvider = new SettingsViewDataProvider(this);
-        this.treeView = vscode.window.createTreeView(`solidity-va-cockpit-${this.id}`, { treeDataProvider: this.dataProvider, showCollapseAll: true });
+        this.treeView = vscode.window.createTreeView(`solidity-nana-cockpit-${this.id}`, { treeDataProvider: this.dataProvider, showCollapseAll: true });
     }
 }
 
@@ -842,14 +842,14 @@ class ExtCallViewDataProvider extends BaseDataProvider {
                             label: `⇢  ${element.call.declaration.name ? element.call.declaration.name : ""}.${element.call.name} (${nodeTypeName(element.call.declaration) || ""})`,
                             //iconPath: 0,
                             command: {
-                                command: 'solidity-va.cockpit.jumpToRange',
+                                command: 'solidity-nana.cockpit.jumpToRange',
                                 arguments: [element.resource, elemLocToRange(element.call._node)],
                                 title: 'JumpTo'
                             }
                         };
                     }),
                     command: {
-                        command: 'solidity-va.cockpit.jumpToRange',
+                        command: 'solidity-nana.cockpit.jumpToRange',
                         arguments: [first.resource,  elemLocToRange(first.parent.function._node)],
                         title: 'JumpTo'
                     },
@@ -876,7 +876,7 @@ class ExtCallView extends BaseView {
         this.cockpit = cockpit;
         this.id = "externalCalls";
         this.dataProvider = new ExtCallViewDataProvider(this);
-        this.treeView = vscode.window.createTreeView(`solidity-va-cockpit-${this.id}`, { treeDataProvider: this.dataProvider });
+        this.treeView = vscode.window.createTreeView(`solidity-nana-cockpit-${this.id}`, { treeDataProvider: this.dataProvider });
         this.treeView.message = "click into the editor to update view...";
     }
 

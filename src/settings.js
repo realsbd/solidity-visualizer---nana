@@ -1,6 +1,6 @@
 'use strict';
 /** 
- * @author github.com/tintinweb
+ * @author github.com/realsbd/solidity-visualizer-nana
  * @license GPLv3
  * 
  * 
@@ -16,11 +16,11 @@ const DEFAULT_FINDFILES_EXCLUDES = '{**/node_modules,**/mock*,**/test*,**/migrat
 const DEFAULT_FINDFILES_EXCLUDES_ALLOWFLAT = '{**/node_modules,**/mock*,**/test*,**/migrations,**/Migrations.sol}';
 
 function extensionConfig() {
-    return vscode.workspace.getConfiguration('solidity-va');
+    return vscode.workspace.getConfiguration('solidity-nana');
 }
 
 function extension() {
-    return vscode.extensions.getExtension('tintinweb.solidity-visual-auditor');
+    return vscode.extensions.getExtension('nana.solidity-visual-auditor');
 }
 
 module.exports = {

@@ -29,7 +29,7 @@ const MESSAGE = `[<img width="130" alt="get in touch with Consensys Diligence" s
 Thanks for using **Solidity Visual Developer** 🤜🤛
 
 ___
-ℹ️ Customize this extension to fit your needs! Show/Hide/Enable/Disable features in \`Preference → Settings → Solidity Visual Developer: solidity-va.*\`, select one of the customized security-aware color themes in \`Preferences → Color Themes\`.
+ℹ️ Customize this extension to fit your needs! Show/Hide/Enable/Disable features in \`Preference → Settings → Solidity Visual Developer: solidity-nana.*\`, select one of the customized security-aware color themes in \`Preferences → Color Themes\`.
 ___
 
 ### What's New?
@@ -43,7 +43,7 @@ The complete changelog can be found [here](https://github.com/ConsenSys/vscode-s
 
 - update: dependencies (surya@0.4.6)
 - new: configuration option to enable the \`surya.mdreport\` "negative Modifiers" feature, see [surya#162](https://github.com/ConsenSys/surya/pull/162)
-    - enabling \`solidity-va.tools.surya.option.negModifiers\` will list all modifiers observed in the file with the ones that are not being used with the listed method being  ~~striked-through~~
+    - enabling \`solidity-nana.tools.surya.option.negModifiers\` will list all modifiers observed in the file with the ones that are not being used with the listed method being  ~~striked-through~~
 
 ![image](https://user-images.githubusercontent.com/2998191/155733325-7a6187b8-e63e-4410-a312-aa2a1c940e31.png)
 
@@ -81,12 +81,12 @@ The complete changelog can be found [here](https://github.com/ConsenSys/vscode-s
   ![image](https://user-images.githubusercontent.com/2865694/120014274-26d5ec00-bfe2-11eb-99f7-64d4a57277a0.png)
 
 - new: we now decorate identifiers that are storage references (treating them like state-vars)
-- new: unit-test stub/template for Hardhat/Ethers #70 (\`preferences → Settings → Solidity Visual Developer: solidity-va.test.defaultUnittestTemplate\`)
-- new: (debug) option to enable/disable stacktraces for parser errors (\`preferences → Settings → Solidity Visual Developer: solidity-va.debug\`)
+- new: unit-test stub/template for Hardhat/Ethers #70 (\`preferences → Settings → Solidity Visual Developer: solidity-nana.test.defaultUnittestTemplate\`)
+- new: (debug) option to enable/disable stacktraces for parser errors (\`preferences → Settings → Solidity Visual Developer: solidity-nana.debug\`)
 - new: show codelenses (inline actions) for abstract contracts
-- new: customize which codelenses to show or hide (\`preferences → Settings → Solidity Visual Developer: solidity-va.codelens.*\`) #76
-- new: expose new command \`solidity-va.surya.graphThis\` #76
-- new: use internal ("dumb" lexical) flattener by default. Optionally allow to select \`truffle-flattener\` (\`preferences → Settings → Solidity Visual Developer: solidity-va.flatten.mode\`)
+- new: customize which codelenses to show or hide (\`preferences → Settings → Solidity Visual Developer: solidity-nana.codelens.*\`) #76
+- new: expose new command \`solidity-nana.surya.graphThis\` #76
+- new: use internal ("dumb" lexical) flattener by default. Optionally allow to select \`truffle-flattener\` (\`preferences → Settings → Solidity Visual Developer: solidity-nana.flatten.mode\`)
 - update: enable \`draw.io csv export\` codelens by default
 - fix: misplaced decoration when document changes
 - fix: function selector is incorrect if there's a comment in the function signature definition #68
@@ -94,7 +94,7 @@ The complete changelog can be found [here](https://github.com/ConsenSys/vscode-s
 
 
 <sub>
-Note: This notification is only shown once per release. Disable future notification? \`settings → solidity-va.whatsNew.disabled : true\`
+Note: This notification is only shown once per release. Disable future notification? \`settings → solidity-nana.whatsNew.disabled : true\`
 </sub>
 ___
 <sub>
@@ -110,7 +110,7 @@ class WhatsNewHandler {
         let extensionVersion = settings.extension().packageJSON.version;
         let config = settings.extensionConfig();
 
-        let lastSeenVersion = context.globalState.get("solidity-va.whatsNew.lastSeenVersion");
+        let lastSeenVersion = context.globalState.get("solidity-nana.whatsNew.lastSeenVersion");
         if(config.whatsNew.disabled){ 
             return;
         }
@@ -151,7 +151,7 @@ class WhatsNewHandler {
                 });
             });
         
-        context.globalState.update("solidity-va.whatsNew.lastSeenVersion", settings.extension().packageJSON.version);
+        context.globalState.update("solidity-nana.whatsNew.lastSeenVersion", settings.extension().packageJSON.version);
     }
 }
 

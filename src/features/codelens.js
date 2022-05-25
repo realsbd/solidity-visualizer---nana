@@ -39,7 +39,7 @@ class SolidityCodeLensProvider  {
         config.report.enable && codeLens.push(
             new vscode.CodeLens(
                 firstLine, {
-                    command: 'solidity-va.surya.mdreport',
+                    command: 'solidity-nana.surya.mdreport',
                     title: 'report'
                 }
             )
@@ -48,7 +48,7 @@ class SolidityCodeLensProvider  {
         codeLens.push(
             new vscode.CodeLens(
                 firstLine, {
-                    command: 'solidity-va.surya.describe',
+                    command: 'solidity-nana.surya.describe',
                     title: 'describe',
                     arguments: [document.uri.fsPath]
                 }
@@ -58,7 +58,7 @@ class SolidityCodeLensProvider  {
         config.graphThis.enable && codeLens.push(
             new vscode.CodeLens(
                 firstLine, {
-                    command: 'solidity-va.surya.graph',
+                    command: 'solidity-nana.surya.graph',
                     title: 'graph (this)',
                     arguments: [document, [document.uri.fsPath]]
                 }
@@ -67,7 +67,7 @@ class SolidityCodeLensProvider  {
         config.graph.enable && codeLens.push(
             new vscode.CodeLens(
                 firstLine, {
-                    command: 'solidity-va.surya.graph',
+                    command: 'solidity-nana.surya.graph',
                     title: 'graph',
                     arguments: [document]  //auto-loads all parsed files
                 }
@@ -76,7 +76,7 @@ class SolidityCodeLensProvider  {
         config.inheritance.enable && codeLens.push(
             new vscode.CodeLens(
                 firstLine, {
-                    command: 'solidity-va.surya.inheritance',
+                    command: 'solidity-nana.surya.inheritance',
                     title: 'inheritance',
                     arguments: [document]
                 }
@@ -85,7 +85,7 @@ class SolidityCodeLensProvider  {
         config.parse.enable && codeLens.push(
             new vscode.CodeLens(
                 firstLine, {
-                    command: 'solidity-va.surya.parse',
+                    command: 'solidity-nana.surya.parse',
                     title: 'parse',
                     arguments: [document]
                 }
@@ -95,7 +95,7 @@ class SolidityCodeLensProvider  {
         config.flatten.enable && codeLens.push(
             new vscode.CodeLens(
                 firstLine, {
-                    command: 'solidity-va.tools.flaterra',
+                    command: 'solidity-nana.tools.flaterra',
                     title: 'flatten',
                     arguments: [document]
                 }
@@ -105,7 +105,7 @@ class SolidityCodeLensProvider  {
         config.funcSigs.enable && codeLens.push(
             new vscode.CodeLens(
                 firstLine, {
-                    command: 'solidity-va.tools.function.signatures',
+                    command: 'solidity-nana.tools.function.signatures',
                     title: 'funcSigs',
                     arguments: [document]
                 }
@@ -119,7 +119,7 @@ class SolidityCodeLensProvider  {
         }
 
         config.uml.enable && codeLens.push(new vscode.CodeLens(firstLine, {
-            command: 'solidity-va.uml.contract.outline',
+            command: 'solidity-nana.uml.contract.outline',
             title: 'uml',
             arguments: [document, Object.values(parser.contracts)]
             })
@@ -127,7 +127,7 @@ class SolidityCodeLensProvider  {
 
         
         config.drawio.enable && codeLens.push(new vscode.CodeLens(firstLine, {
-            command: 'solidity-va.uml.contract.export.drawio.csv',
+            command: 'solidity-nana.uml.contract.export.drawio.csv',
             title: 'draw.io',
             arguments: [document, Object.values(parser.contracts)]
             })
@@ -152,7 +152,7 @@ class SolidityCodeLensProvider  {
                 // add uml to interface
                 let item = contractObj;
                 config.uml.enable && codeLens.push(new vscode.CodeLens(elemLocToRange(item._node), {
-                    command: 'solidity-va.uml.contract.outline',
+                    command: 'solidity-nana.uml.contract.outline',
                     title: 'uml',
                     arguments: [document, [item]]
                     })
@@ -169,28 +169,28 @@ class SolidityCodeLensProvider  {
         let config = settings.extensionConfig().codelens;
 
         config.unittestStub.enable && lenses.push(new vscode.CodeLens(range, {
-            command: 'solidity-va.test.createTemplate',
+            command: 'solidity-nana.test.createTemplate',
             title: 'UnitTest stub',
             arguments: [document, item.name]
             })
         );
         
         config.dependencies.enable && lenses.push(new vscode.CodeLens(range, {
-            command: 'solidity-va.surya.dependencies',
+            command: 'solidity-nana.surya.dependencies',
             title: 'dependencies',
             arguments: [document, item.name, []]
             })
         );
 
         config.uml.enable && lenses.push(new vscode.CodeLens(range, {
-            command: 'solidity-va.uml.contract.outline',
+            command: 'solidity-nana.uml.contract.outline',
             title: 'uml',
             arguments: [document, [item]]
             })
         );
 
         config.drawio.enable && lenses.push(new vscode.CodeLens(range, {
-            command: 'solidity-va.uml.contract.export.drawio.csv',
+            command: 'solidity-nana.uml.contract.export.drawio.csv',
             title: 'draw.io',
             arguments: [document, [item]]
             })
@@ -207,14 +207,14 @@ class SolidityCodeLensProvider  {
         let config = settings.extensionConfig().codelens;
 
         config.ftrace.enable && lenses.push(new vscode.CodeLens(range, {
-            command: 'solidity-va.surya.ftrace',
+            command: 'solidity-nana.surya.ftrace',
             title: 'ftrace',
             arguments: [document, contractName, item._node.name, "all"]
             })
         );
         //exclude constructor (item._node.name == null)
         config.funcSigs.enable && item._node.name && lenses.push(new vscode.CodeLens(range, {
-            command: 'solidity-va.tools.function.signatureForAstItem',
+            command: 'solidity-nana.tools.function.signatureForAstItem',
             title: 'funcSig',
             arguments: [item]
             })

@@ -453,7 +453,7 @@ function onActivate(context) {
         /** command setup */
         context.subscriptions.push(
             vscode.commands.registerCommand(
-                'solidity-va.whatsNew.show',
+                'solidity-nana.whatsNew.show',
                 function () {
                     new WhatsNewHandler().showMessage(context);
                 }
@@ -462,7 +462,7 @@ function onActivate(context) {
 
         context.subscriptions.push(
             vscode.commands.registerCommand(
-                'solidity-va.test.createTemplate',
+                'solidity-nana.test.createTemplate',
                 function (doc, contractName) {
                     commands.generateUnittestStubForContract(doc || vscode.window.activeTextEditor.document, contractName);
                 }
@@ -471,7 +471,7 @@ function onActivate(context) {
 
         context.subscriptions.push(
             vscode.commands.registerCommand(
-                'solidity-va.surya.mdreport',
+                'solidity-nana.surya.mdreport',
                 function (doc, multiSelectTreeItems) {
                     doc = multiSelectTreeItems || doc;
                     commands.surya(doc || vscode.window.activeTextEditor.document, "mdreport");
@@ -481,7 +481,7 @@ function onActivate(context) {
 
         context.subscriptions.push(
             vscode.commands.registerCommand(
-                'solidity-va.surya.graph',
+                'solidity-nana.surya.graph',
                 function (doc, files) {
                     if (files && typeof files[0] === "object" && files[0].hasOwnProperty("children")) {
                         //treeItem or fspaths
@@ -495,7 +495,7 @@ function onActivate(context) {
 
         context.subscriptions.push(
             vscode.commands.registerCommand(
-                'solidity-va.surya.graphThis',
+                'solidity-nana.surya.graphThis',
                 function () {
                     commands.surya(vscode.window.activeTextEditor.document, "graph", [vscode.window.activeTextEditor.document.uri.fsPath]);
                 }
@@ -503,7 +503,7 @@ function onActivate(context) {
         );
         context.subscriptions.push(
             vscode.commands.registerCommand(
-                'solidity-va.surya.graphSimple',
+                'solidity-nana.surya.graphSimple',
                 function (doc, files) {
                     if (files && typeof files[0] === "object" && files[0].hasOwnProperty("children")) {
                         //treeItem or fspaths
@@ -516,7 +516,7 @@ function onActivate(context) {
         );
         context.subscriptions.push(
             vscode.commands.registerCommand(
-                'solidity-va.surya.inheritance',
+                'solidity-nana.surya.inheritance',
                 function (doc, multiSelectTreeItems) {
                     doc = multiSelectTreeItems || doc;
                     commands.surya(doc || vscode.window.activeTextEditor.document, "inheritance");
@@ -525,7 +525,7 @@ function onActivate(context) {
         );
         context.subscriptions.push(
             vscode.commands.registerCommand(
-                'solidity-va.surya.parse',
+                'solidity-nana.surya.parse',
                 function (doc) {
                     commands.surya(doc || vscode.window.activeTextEditor.document, "parse");
                 }
@@ -533,7 +533,7 @@ function onActivate(context) {
         );
         context.subscriptions.push(
             vscode.commands.registerCommand(
-                'solidity-va.surya.dependencies',
+                'solidity-nana.surya.dependencies',
                 function (doc, ContractName) {
                     commands.surya(doc || vscode.window.activeTextEditor.document, "dependencies", [ContractName]);
                 }
@@ -541,7 +541,7 @@ function onActivate(context) {
         );
         context.subscriptions.push(
             vscode.commands.registerCommand(
-                'solidity-va.surya.ftrace',
+                'solidity-nana.surya.ftrace',
                 function (doc, contractName, functionName, mode) {
                     commands.surya(doc || vscode.window.activeTextEditor.document, "ftrace", [contractName, functionName, mode]);
                 }
@@ -550,7 +550,7 @@ function onActivate(context) {
 
         context.subscriptions.push(
             vscode.commands.registerCommand(
-                'solidity-va.insights.topLevelContracts',
+                'solidity-nana.insights.topLevelContracts',
                 function () {
                     commands.findTopLevelContracts();
                 }
@@ -559,7 +559,7 @@ function onActivate(context) {
 
         context.subscriptions.push(
             vscode.commands.registerCommand(
-                'solidity-va.tools.flaterra',
+                'solidity-nana.tools.flaterra',
                 function (doc) {
                     commands.solidityFlattener([doc && doc.uri || vscode.window.activeTextEditor.document.uri]);
                 }
@@ -568,14 +568,14 @@ function onActivate(context) {
 
         context.subscriptions.push(
             vscode.commands.registerCommand(
-                'solidity-va.cockpit.explorer.context.flatten',
+                'solidity-nana.cockpit.explorer.context.flatten',
                 async function (treeItem, multiSelectTreeItems) {
                     multiSelectTreeItems = multiSelectTreeItems || [];
                     [...multiSelectTreeItems, treeItem].forEach(async treeItem => {
                         commands.solidityFlattener([treeItem.resource]);
                         /*
                         await vscode.extensions
-                            .getExtension('tintinweb.vscode-solidity-flattener')
+                            .getExtension('nana.vscode-solidity-flattener')
                             .activate()
                             .then(
                                 async () => {
@@ -591,7 +591,7 @@ function onActivate(context) {
 
         context.subscriptions.push(
             vscode.commands.registerCommand(
-                'solidity-va.tools.flattenCandidates',
+                'solidity-nana.tools.flattenCandidates',
                 function () {
                     commands.flattenCandidates();
                 }
@@ -600,7 +600,7 @@ function onActivate(context) {
 
         context.subscriptions.push(
             vscode.commands.registerCommand(
-                'solidity-va.cockpit.topLevelContracts.flatten',
+                'solidity-nana.cockpit.topLevelContracts.flatten',
                 function () {
                     let sourceFiles = cockpit.views.topLevelContracts.dataProvider.data.reduce(function (obj, item) {
                         obj[path.basename(item.path, ".sol")] = vscode.Uri.file(item.path);
@@ -614,7 +614,7 @@ function onActivate(context) {
 
         context.subscriptions.push(
             vscode.commands.registerCommand(
-                'solidity-va.tools.function.signatures',
+                'solidity-nana.tools.function.signatures',
                 function (doc, asJson) {
                     commands.listFunctionSignatures(doc || vscode.window.activeTextEditor.document, asJson);
                 }
@@ -623,7 +623,7 @@ function onActivate(context) {
 
         context.subscriptions.push(
             vscode.commands.registerCommand(
-                'solidity-va.tools.function.signatures.json',
+                'solidity-nana.tools.function.signatures.json',
                 function (doc) {
                     commands.listFunctionSignatures(doc || vscode.window.activeTextEditor.document, true);
                 }
@@ -632,7 +632,7 @@ function onActivate(context) {
 
         context.subscriptions.push(
             vscode.commands.registerCommand(
-                'solidity-va.tools.function.signatures.forWorkspace.json',
+                'solidity-nana.tools.function.signatures.forWorkspace.json',
                 function (doc) {
                     commands.listFunctionSignaturesForWorkspace(true);
                 }
@@ -641,7 +641,7 @@ function onActivate(context) {
 
         context.subscriptions.push(
             vscode.commands.registerCommand(
-                'solidity-va.tools.function.signatureForAstItem',
+                'solidity-nana.tools.function.signatureForAstItem',
                 function (item) {
                     commands.listFunctionSignatureForAstItem(item);
                 }
@@ -650,7 +650,7 @@ function onActivate(context) {
 
         context.subscriptions.push(
             vscode.commands.registerCommand(
-                'solidity-va.tools.remix.openExternal',
+                'solidity-nana.tools.remix.openExternal',
                 function () {
                     vscode.env.openExternal(vscode.Uri.parse("https://remix.ethereum.org"));
                 }
@@ -659,7 +659,7 @@ function onActivate(context) {
 
         context.subscriptions.push(
             vscode.commands.registerCommand(
-                'solidity-va.uml.contract.outline',
+                'solidity-nana.uml.contract.outline',
                 function (doc, contractObjects) {
                     commands.umlContractsOutline(contractObjects);
                 }
@@ -668,7 +668,7 @@ function onActivate(context) {
 
         context.subscriptions.push(
             vscode.commands.registerCommand(
-                'solidity-va.uml.contract.export.drawio.csv',
+                'solidity-nana.uml.contract.export.drawio.csv',
                 function (doc, contractObjects) {
                     commands.drawioContractsOutlineAsCSV(contractObjects);
                 }
@@ -676,7 +676,7 @@ function onActivate(context) {
         );
 
         context.subscriptions.push(
-            vscode.commands.registerCommand("solidity-va.cockpit.topLevelContracts.refresh", async (treeItem, multiSelectTreeItems) => {
+            vscode.commands.registerCommand("solidity-nana.cockpit.topLevelContracts.refresh", async (treeItem, multiSelectTreeItems) => {
                 if (multiSelectTreeItems) {
                     cockpit.views.topLevelContracts.refresh(multiSelectTreeItems.filter(t => !t.path.endsWith(".sol")).map(t => t.path));
                 } else {
@@ -686,19 +686,19 @@ function onActivate(context) {
         );
 
         context.subscriptions.push(
-            vscode.commands.registerCommand("solidity-va.cockpit.explorer.refresh", async () => {
+            vscode.commands.registerCommand("solidity-nana.cockpit.explorer.refresh", async () => {
                 cockpit.views.explorer.refresh();
             })
         );
 
         context.subscriptions.push(
-            vscode.commands.registerCommand("solidity-va.cockpit.flatFiles.refresh", async () => {
+            vscode.commands.registerCommand("solidity-nana.cockpit.flatFiles.refresh", async () => {
                 cockpit.views.flatFiles.refresh();
             })
         );
 
         context.subscriptions.push(
-            vscode.commands.registerCommand("solidity-va.cockpit.jumpToRange", (documentUri, range) => {
+            vscode.commands.registerCommand("solidity-nana.cockpit.jumpToRange", (documentUri, range) => {
                 vscode.workspace.openTextDocument(documentUri).then(doc => {
                     vscode.window.showTextDocument(doc).then(editor => {
                         if (range) {
@@ -710,7 +710,7 @@ function onActivate(context) {
         );
 
         context.subscriptions.push(
-            vscode.commands.registerCommand("solidity-va.cockpit.settings.toggle", async (treeItem) => {
+            vscode.commands.registerCommand("solidity-nana.cockpit.settings.toggle", async (treeItem) => {
                 let cfg = vscode.workspace.getConfiguration(treeItem.metadata.extension);
                 let current = cfg.get(treeItem.metadata.section);
                 await cfg.update(treeItem.metadata.section, !current);

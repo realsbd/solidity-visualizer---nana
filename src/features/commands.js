@@ -189,7 +189,7 @@ class Commands{
                 } else {
                     ret = surya.graph(args || files, {colorScheme: suryaDefaultColorSchemeDark});
                 }
-                //solidity-va.preview.render.markdown
+                //solidity-nana.preview.render.markdown
                 vscode.workspace.openTextDocument({content: ret, language: "dot"})
                     .then(doc => {
                         if(settings.extensionConfig().preview.dot){

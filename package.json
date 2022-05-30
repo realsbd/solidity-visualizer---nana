@@ -2,7 +2,18 @@
   "name": "solidity-visualizer---nana",
 	"displayName": "Solidity Visualizer - Nana",
 	"description": "Visualize, Edit, Debug, Interprete and Report your smart contracts with graphical illurstraions with Solidity Visualizer",
-	"version": "0.0.1",
+	"keywords": [
+        "solidity",
+        "ethereum",
+        "blockchain",
+        "security",
+        "audit",
+        "review",
+        "developer",
+        "solidity security",
+        "solidity audit"
+    ],
+    "version": "0.0.1",
 	"engines": {
 		"vscode": "^1.67.0"
 	},
@@ -10,21 +21,505 @@
 		"Other"
 	],
 	"activationEvents": [
-        "onCommand:solidity-visualizer---nana.helloWorld"
+        "onLanguage:solidity",
+        "onCommand:solidity-nana.whatsNew.show",
+        "onCommand:solidity-nana.surya.graph",
+        "onCommand:solidity-nana.surya.inheritance",
+        "onCommand:solidity-nana.insights.topLevelContracts",
+        "onCommand:solidity-nana.tools.flaterra",
+        "onCommand:solidity-nana.cockpit.explorer.context.flatten",
+        "onCommand:solidity-nana.tools.flattenCandidates",
+        "onCommand:solidity-nana.tools.function.signatures",
+        "onCommand:solidity-nana.tools.function.signatures.json",
+        "onCommand:solidity-nana.tools.function.signatures.forWorkspace.json",
+        "onCommand:solidity-nana.tools.remix.openExternal",
+        "onCommand:solidity-nana.cockpit.explorer.refresh",
+        "onCommand:solidity-nana.cockpit.topLevelContracts.refresh",
+        "onCommand:solidity-nana.cockpit.settings.toggle",
+        "onCommand:solidity-nana.etherscan.getSource",
+        "onView:solidity-nana-cockpit",
+        "onView:solidity-nana-cockpit-explorer",
+        "onView:solidity-nana-cockpit-topLevelContracts",
+        "onView:solidity-nana-cockpit-flatFiles",
+        "onView:solidity-nana-cockpit-settings",
+        "onView:solidity-nana-cockpit-ftrace",
+        "onView:solidity-nana-cockpit-publicMethods",
+        "onView:solidity-nana-cockpit-externalCalls"
 	],
-	"main": "./extension.js",
-	"contributes": {
-		"commands": [{
-            "command": "solidity-visualizer---nana.helloWorld",
-            "title": "Hello World"
-
-		}]
+	"main": "./src/extension.js",
+	"capabilities": {
+        "hoverProvider": "true"
+    },
+    "contributes": {
+		"viewsContainers": {
+            "activitybar": [
+                {
+                    "id": "solidity-nana-cockpit",
+                    "title": "Solidity Visual Developer",
+                    "icon": "images/glass3.png"
+                }
+            ]
+        },
+        "views": {
+            "solidity-nana-cockpit": [
+                {
+                    "id": "solidity-nana-cockpit-explorer",
+                    "name": "Workspace: Explorer"
+                },
+                {
+                    "id": "solidity-nana-cockpit-topLevelContracts",
+                    "name": "Workspace: Top Level Contracts"
+                },
+                {
+                    "id": "solidity-nana-cockpit-flatFiles",
+                    "name": "Workspace: */flat_* Files"
+                },
+                {
+                    "id": "solidity-nana-cockpit-publicMethods",
+                    "name": "Context: Public StateChanging Methods"
+                },
+                {
+                    "id": "solidity-nana-cockpit-externalCalls",
+                    "name": "Context: External Calls"
+                },
+                {
+                    "id": "solidity-nana-cockpit-ftrace",
+                    "name": "Context: Function Call Trace"
+                },
+                {
+                    "id": "solidity-nana-cockpit-settings",
+                    "name": "Settings"
+                }
+            ]
+        },
+        "menus": {
+            "view/title": [
+                {
+                    "command": "solidity-nana.cockpit.explorer.refresh",
+                    "when": "view == solidity-nana-cockpit-explorer",
+                    "group": "navigation"
+                },
+                {
+                    "command": "solidity-nana.cockpit.topLevelContracts.refresh",
+                    "when": "view == solidity-nana-cockpit-topLevelContracts",
+                    "group": "navigation"
+                },
+                {
+                    "command": "solidity-nana.cockpit.topLevelContracts.flatten",
+                    "when": "view == solidity-nana-cockpit-topLevelContracts",
+                    "group": "navigation"
+                },
+                {
+                    "command": "solidity-nana.cockpit.flatFiles.refresh",
+                    "when": "view == solidity-nana-cockpit-flatFiles",
+                    "group": "navigation"
+                }
+            ],
+            "view/item/context": [
+                {
+                    "group": "solidity",
+                    "command": "solidity-nana.cockpit.topLevelContracts.refresh",
+                    "when": "view == solidity-nana-cockpit-explorer && viewItem =~ /^((?!\\.sol).)*$/"
+                },
+                {
+                    "group": "solidity",
+                    "command": "solidity-nana.cockpit.explorer.context.flatten",
+                    "when": "view == solidity-nana-cockpit-explorer && viewItem =~ /\\.sol/ || view == solidity-nana-cockpit-topLevelContracts"
+                },
+                {
+                    "group": "solidity",
+                    "command": "solidity-nana.surya.mdreport",
+                    "when": "view == solidity-nana-cockpit-explorer || view == solidity-nana-cockpit-topLevelContracts || view == solidity-nana-cockpit-flatFiles"
+                },
+                {
+                    "group": "solidity",
+                    "command": "solidity-nana.surya.graph",
+                    "when": "view == solidity-nana-cockpit-explorer || view == solidity-nana-cockpit-topLevelContracts || view == solidity-nana-cockpit-flatFiles"
+                },
+                {
+                    "group": "solidity",
+                    "command": "solidity-nana.surya.graphSimple",
+                    "when": "view == solidity-nana-cockpit-explorer || view == solidity-nana-cockpit-topLevelContracts || view == solidity-nana-cockpit-flatFiles"
+                },
+                {
+                    "group": "solidity",
+                    "command": "solidity-nana.surya.inheritance",
+                    "when": "view == solidity-nana-cockpit-explorer || view == solidity-nana-cockpit-topLevelContracts || view == solidity-nana-cockpit-flatFiles"
+                }
+            ]
+        },
+        "commands": [
+            {
+                "command": "solidity-nana.test.createTemplate",
+                "title": "Unittest - create stub for current contract",
+                "category": "Solidity Visual Developer"
+            },
+            {
+                "command": "solidity-nana.surya.mdreport",
+                "title": "Nana- generate report",
+                "category": "Solidity Visual Developer"
+            },
+            {
+                "command": "solidity-nana.surya.describe",
+                "title": "Nana- describe",
+                "category": "Solidity Visual Developer"
+            },
+            {
+                "command": "solidity-nana.surya.graph",
+                "title": "Nana- call graph",
+                "category": "Solidity Visual Developer"
+            },
+            {
+                "command": "solidity-nana.surya.graphThis",
+                "title": "Nana- call graph for active editor (graph this)",
+                "category": "Solidity Visual Developer"
+            },
+            {
+                "command": "solidity-nana.surya.graphSimple",
+                "title": "Nana - contract interaction graph",
+                "category": "Solidity Visual Developer"
+            },
+            {
+                "command": "solidity-nana.surya.inheritance",
+                "title": "Nana - show inheritance graph",
+                "category": "Solidity Visual Developer"
+            },
+            {
+                "command": "solidity-nana.insights.topLevelContracts",
+                "title": "Tools - list suggested top level / entry point contracts",
+                "category": "Solidity Visual Developer"
+            },
+            {
+                "command": "solidity-nana.tools.flaterra",
+                "title": "Tools - flatten current file",
+                "category": "Solidity Visual Developer"
+            },
+            {
+                "command": "solidity-nana.cockpit.explorer.context.flatten",
+                "title": "Solidity - Flatten Selected File(s)",
+                "category": "Solidity Visual Developer"
+            },
+            {
+                "command": "solidity-nana.cockpit.topLevelContracts.flatten",
+                "title": "Flatten",
+                "category": "Solidity Visual Developer",
+                "icon": {
+                    "light": "images/cmd-flatten.svg",
+                    "dark": "images/cmd-flatten.svg"
+                }
+            },
+            {
+                "command": "solidity-nana.tools.flattenCandidates",
+                "title": "Tools - flatten all suggested top level contracts",
+                "category": "Solidity Visual Developer"
+            },
+            {
+                "command": "solidity-nana.tools.function.signatures",
+                "title": "Tools - list function signatures",
+                "category": "Solidity Visual Developer"
+            },
+            {
+                "command": "solidity-nana.tools.function.signatures.json",
+                "title": "Tools - list function signatures (json)",
+                "category": "Solidity Visual Developer"
+            },
+            {
+                "command": "solidity-nana.tools.function.signatures.forWorkspace.json",
+                "title": "Tools - list function signatures for all solidity files in workspace (json)",
+                "category": "Solidity Visual Developer"
+            },
+            {
+                "command": "solidity-nana.tools.remix.openExternal",
+                "title": "Tools - launch Remix-IDE",
+                "category": "Solidity Visual Developer"
+            },
+            {
+                "command": "solidity-nana.cockpit.explorer.refresh",
+                "title": "Scan Workspace",
+                "category": "Solidity Visual Developer",
+                "icon": {
+                    "light": "images/refresh-light.svg",
+                    "dark": "images/refresh-dark.svg"
+                }
+            },
+            {
+                "command": "solidity-nana.cockpit.topLevelContracts.refresh",
+                "title": "Find Top Level Contracts",
+                "category": "Solidity Visual Developer",
+                "icon": {
+                    "light": "images/refresh-light.svg",
+                    "dark": "images/refresh-dark.svg"
+                }
+            },
+            {
+                "command": "solidity-nana.cockpit.flatFiles.refresh",
+                "title": "Scan Workspace",
+                "category": "Solidity Visual Developer",
+                "icon": {
+                    "light": "images/refresh-light.svg",
+                    "dark": "images/refresh-dark.svg"
+                }
+            },
+            {
+                "command": "solidity-nana.cockpit.settings.toggle",
+                "title": "Toggle Setting",
+                "category": "Solidity Visual Developer"
+            },
+            {
+                "command": "solidity-nana.whatsNew.show",
+                "title": "Extension - What's New",
+                "category": "Solidity Visual Developer"
+            },
+            {
+                "command": "solidity-nana.etherscan.getSource",
+                "title": "EtherScan - get contract source for address",
+                "category": "Solidity Visual Developer"
+            }
+        ],
+        "configuration": {
+            "type": "object",
+            "title": "Solidity Visual Developer configuration",
+            "properties": {
+                "solidity-nana.hover": {
+                    "type": "boolean",
+                    "default": true,
+                    "description": "Whether to enable/disable Solidity hover."
+                },
+                "solidity-nana.deco.statevars": {
+                    "type": "boolean",
+                    "default": true,
+                    "description": "Whether to enable/disable Solidity statevar decoration"
+                },
+                "solidity-nana.deco.arguments": {
+                    "type": "boolean",
+                    "default": true,
+                    "description": "Whether to enable/disable semantic highlighting for function arguments"
+                },
+                "solidity-nana.deco.argumentsSuffix": {
+                    "type": "string",
+                    "default": "⬆",
+                    "description": "custom Suffix/Character that is appended to the decoration when performing semantic highlighting for function arguments"
+                },
+                "solidity-nana.deco.warn.reserved": {
+                    "type": "boolean",
+                    "default": true,
+                    "description": "Enable/Disable warning decoration when overriding reserved names"
+                },
+                "solidity-nana.deco.warn.externalCalls": {
+                    "type": "boolean",
+                    "default": true,
+                    "description": "Enable/Disable gutter-icon decorations for lines performing external address calls"
+                },
+                "solidity-nana.outline.enable": {
+                    "type": "boolean",
+                    "default": true,
+                    "description": "Enable/Disable outline / symbolprovider"
+                },
+                "solidity-nana.outline.decorations": {
+                    "type": "boolean",
+                    "default": true,
+                    "description": "Whether to enable/disable Function Mutability/Accessibility decoration in the outline view"
+                },
+                "solidity-nana.outline.inheritance.show": {
+                    "type": "boolean",
+                    "default": true,
+                    "description": "Whether to show/hide inherited names in the outline view"
+                },
+                "solidity-nana.outline.extras": {
+                    "type": "boolean",
+                    "default": true,
+                    "description": "Whether to show/hide extras (complexity, state var access) for functions in the outline view"
+                },
+                "solidity-nana.outline.var.storage_annotations": {
+                    "type": "boolean",
+                    "default": true,
+                    "description": "Whether to show/hide storage annotations for variables in the outline view"
+                },
+                "solidity-nana.outline.pragmas.show": {
+                    "type": "boolean",
+                    "default": true,
+                    "description": "Whether to show/hide pragmas in the outline view"
+                },
+                "solidity-nana.outline.imports.show": {
+                    "type": "boolean",
+                    "default": true,
+                    "description": "Whether to show/hide imports in the outline view"
+                },
+                "solidity-nana.parser.parseImports": {
+                    "type": "boolean",
+                    "default": true,
+                    "description": "Whether to recursively parse imports or not"
+                },
+                "solidity-nana.diagnostics.cdili_json.import": {
+                    "type": "boolean",
+                    "default": false,
+                    "description": "Recursively search for CDILI format *-issues.json from external scanners and visualize findings as diagnostics in vscode"
+                },
+                "solidity-nana.tools.surya.input.contracts": {
+                    "type": "string",
+                    "enum": [
+                        "cached",
+                        "workspace"
+                    ],
+                    "default": "cached",
+                    "description": "Define whether Nana should take cached files or all contracts in the workspace as input"
+                },
+                "solidity-nana.tools.surya.option.negModifiers": {
+                    "type": "boolean",
+                    "default": false,
+                    "description": "Surya.mdreport: Also list modifiers that are not present ( ~~strikedthrough~~). This may help catch issues relating to missing modifiers."
+                },
+                "solidity-nana.preview.dot": {
+                    "type": "boolean",
+                    "default": true,
+                    "description": "Open dot output in graphviz rendered form (relies on a graphviz preview extension to be installed)"
+                },
+                "solidity-nana.preview.markdown": {
+                    "type": "boolean",
+                    "default": false,
+                    "description": "Open markdown output in rendered form (relies on a markdown preview extension to be installed)"
+                },
+                "solidity-nana.codelens.enable": {
+                    "type": "boolean",
+                    "default": true,
+                    "description": "Enable/Disable all codelenses - inline action (master switch)"
+                },
+                "solidity-nana.codelens.report.enable": {
+                    "type": "boolean",
+                    "default": true,
+                    "description": "Enable/Disable codelens 'report'"
+                },
+                "solidity-nana.codelens.graph.enable": {
+                    "type": "boolean",
+                    "default": true,
+                    "description": "Enable/Disable codelens 'graph'"
+                },
+                "solidity-nana.codelens.graphThis.enable": {
+                    "type": "boolean",
+                    "default": true,
+                    "description": "Enable/Disable codelens 'graphThis'"
+                },
+                "solidity-nana.codelens.inheritance.enable": {
+                    "type": "boolean",
+                    "default": true,
+                    "description": "Enable/Disable codelens 'inheritance'"
+                },
+                "solidity-nana.codelens.parse.enable": {
+                    "type": "boolean",
+                    "default": true,
+                    "description": "Enable/Disable codelens 'parse'"
+                },
+                "solidity-nana.codelens.flatten.enable": {
+                    "type": "boolean",
+                    "default": true,
+                    "description": "Enable/Disable codelens 'report'"
+                },
+                "solidity-nana.codelens.funcSigs.enable": {
+                    "type": "boolean",
+                    "default": true,
+                    "description": "Enable/Disable codelens 'funcSigs'"
+                },
+                "solidity-nana.codelens.uml.enable": {
+                    "type": "boolean",
+                    "default": true,
+                    "description": "Enable/Disable codelens 'uml'"
+                },
+                "solidity-nana.codelens.unittestStub.enable": {
+                    "type": "boolean",
+                    "default": true,
+                    "description": "Enable/Disable codelens 'UnitTest Stub'"
+                },
+                "solidity-nana.codelens.dependencies.enable": {
+                    "type": "boolean",
+                    "default": true,
+                    "description": "Enable/Disable codelens 'report'"
+                },
+                "solidity-nana.codelens.ftrace.enable": {
+                    "type": "boolean",
+                    "default": true,
+                    "description": "Enable/Disable codelens 'ftrace'"
+                },
+                "solidity-nana.codelens.drawio.enable": {
+                    "type": "boolean",
+                    "default": true,
+                    "description": "Enable/Disable codelens 'draw.io' uml export"
+                },
+                "solidity-nana.findAllReferences.enable": {
+                    "type": "boolean",
+                    "default": true,
+                    "description": "Enable/Disable right-click -> Find All References. Note: This allows you to disable the built-in reference provider in favor of one of another extension. Takes effect after restart."
+                },
+                "solidity-nana.mode.active": {
+                    "type": "boolean",
+                    "default": true,
+                    "description": "Enable/Disable all active components of this extension (emergency)."
+                },
+                "solidity-nana.uml.options": {
+                    "type": "text",
+                    "default": "",
+                    "description": "Add custom uml options"
+                },
+                "solidity-nana.uml.actors.enable": {
+                    "type": "boolean",
+                    "default": false,
+                    "description": "Enable/Disable actors in uml"
+                },
+                "solidity-nana.cockpit.view.topLevelContracts.listStyle": {
+                    "type": "string",
+                    "enum": [
+                        "flat",
+                        "tree"
+                    ],
+                    "default": "flat",
+                    "description": "Select TopLevelContracts view list style."
+                },
+                "solidity-nana.whatsNew.disabled": {
+                    "type": "boolean",
+                    "default": false,
+                    "description": "Enable/Disable update notifications"
+                },
+                "solidity-nana.test.defaultUnittestTemplate": {
+                    "type": "string",
+                    "enum": [
+                        "hardhat",
+                        "truffle"
+                    ],
+                    "default": "truffle",
+                    "description": "Select which default template to use when creating a unitTest stub (e.g. truffle, hardhat)"
+                },
+                "solidity-nana.debug.parser.showExceptions": {
+                    "type": "boolean",
+                    "default": false,
+                    "description": "Enable/Disable printing parser error / stacktraces to console log (noisy)"
+                },
+                "solidity-nana.flatten.mode": {
+                    "type": "string",
+                    "enum": [
+                        "internal (lexical)",
+                        "truffle"
+                    ],
+                    "default": "default",
+                    "description": "Select which flattener to use (e.g. default=lexical flattener, truffle=truffle-flattener)"
+                }
+            }
+        }
 	},
-	"scripts": {
-		"lint": "eslint .",
-		"pretest": "npm run lint",
-		"test": "node ./test/runTest.js"
-	},
+	"extensionDependencies": [
+        "nana.vscode-solidity-language",
+        "nana.graphviz-interactive-preview"
+    ],
+    "extensionPack": [
+        "nana.vscode-solidity-flattener",
+        "jebbs.plantuml",
+        "nana.vscode-inline-bookmarks",
+        "nana.vscode-ethover"
+    ],
+    "dependencies": {
+        "c3-linearization": "^0.3.0",
+        "keccak": "^3.0.2",
+        "solidity-workspace": "^0.1.5",
+        "surya": "^0.4.6"
+    },
 	"devDependencies": {
         "@types/vscode": "^1.67.0",
         "@types/glob": "^7.2.0",
